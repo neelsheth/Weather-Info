@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useRef, useState } from 'react'
 import DisplayInfo from './DisplayInfo'
 
@@ -11,12 +12,17 @@ export default function Home() {
         console.log(input)
         setError(false);
 
-        fetch(`http://api.weatherstack.com/current?access_key=3749f85c1f5c1e43eafd3bf8c87b7630&query=${input}`)
-            .then((res)=> res.json())
+        // fetch(`http://api.weatherstack.com/current?access_key=3749f85c1f5c1e43eafd3bf8c87b7630&query=${input}`)
+        //     .then((res)=> res.json())
+        //     .then((json)=>{
+            //         setData(json);
+            //     })
+            
+            axios(`http://api.weatherstack.com/current?access_key=3749f85c1f5c1e43eafd3bf8c87b7630&query=${input}`)
             .then((json)=>{
-                console.log(json);
-                setData(json);
-            })
+                        console.log(json);
+                    setData(json);
+                })
     }
 
 
@@ -29,7 +35,7 @@ export default function Home() {
             <input ref={inputRef}></input>
             <button onClick={serch}>Serch</button>
             {error && <h1>Not a valid search input..</h1>}
-            {data !== null && <DisplayInfo res={data}></DisplayInfo>}
+            {data !== null && <DisplayInfo res={data.data}></DisplayInfo>}
         </div>
     )
 }
