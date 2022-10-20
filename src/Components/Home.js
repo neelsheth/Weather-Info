@@ -27,9 +27,6 @@ export default function Home() {
 
 
 
-
-
-
     return (
         <div className='box'>
             <input ref={inputRef}></input>
